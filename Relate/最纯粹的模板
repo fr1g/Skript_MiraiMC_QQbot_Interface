@@ -1,0 +1,26 @@
+on command "/rewaczero":
+    sender has permission "admin":
+        cancel event
+        message "【共鸣】已加载的SkMQi附属：<你的附属名和版本号>"
+
+command <自定义你的重载指令>:
+    trigger:
+        sender has permission "admin":
+            wait 1 tick
+            make sender execute command "/sk reload <你的脚本的文件名>"
+
+# 这是一个SkMQi附属的模板，同时是一个允许自定义指令执行的附属。
+# 你可以在上方相应的地方填入你的附属的信息，以保证其他SkMQi用户的共鸣体验。请注意！在修改模板时请注意一致性！
+# 谨记变量表：
+# {svdqapi.mgr::*} 管理员Q号的变量表
+        # {obsh::1}#接收机器人的Q号
+        # {obsh::2}#事件群名
+        # {obsh::3}#事件群号
+        # {obsh::4}#发送人的群名片
+        # {obsh::5}#发送人的Q号 这个是number类型。
+        # {obsh::6}#事件消息
+# 判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}
+# 请注意，除非使用多方面的限定，否则所有管理员都会是全局的。
+# 另外，由于各种不确定，请注意不同命令之间的配合，以及学会“卡时间”。
+
+#这里开始写附属的第一个event，我建议同步使用on log:
