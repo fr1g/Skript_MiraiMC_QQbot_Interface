@@ -12,7 +12,7 @@ btw：Simplified Chinese Language Only. Unless you use Q-ten-Q-cent rather than 
 呜呜 我真的不敢用reflect……晚点一定晚点一定
 
 然后就是吧 这个脚本有简单的处理冲突能力 但是弱的不行 建议别瞎折腾。
-Repo里面有一个附属的示例。请尽可能按照里面的要求写你自己的功能。
+Repo里面有一个附属的示例。请尽可能按照里面的要求写你自己的功能。（忘了标注了 那个的重载指令是skr_reply 我以后的附属的重载都是这个风格 awa）
 还有就是关于卡时间……不同服务器有不同服务器的情况 建议先跑一次timings 然后写功能 然后测试、卡时间、在接口代码里加点condition 以此提高整体功能的稳定性。
 如果你为SkMQi写了一个很流批的附属 欢迎提交给我 提pr或发到邮箱： frigeso@icloud.com 都行。
 **我直接欢迎大佬**
