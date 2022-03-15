@@ -35,5 +35,6 @@ on log:
                 if {_skqb.reply::1} is "说点什么":
                     make console execute command "/呐"
                     make console execute command "/mirai sendgroupmessage %{obsh::1}% %{obsh::3}% 这是Komandy———借助强大的MiraiMC、Skript和基于Skript的接口SkMQi 通过SkMQi-Reply实现的一次简单的回复。随着不同变量的叠加和功能的实现，Komandy将利用这一系列插件的配合，在MMC尚未支持Mirai插件之前，突破限制并实现许多功能。"
+                    set {obsh::*} to null#最好每次收尾
                     stop
 
