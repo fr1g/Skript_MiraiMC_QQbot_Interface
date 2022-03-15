@@ -1,0 +1,65 @@
+#WatchDog Ver A
+#by Feiron Iguista (francoisifrig) from Corona Studio
+#for SkMQi at https://github.com/fr1g/Skript_MiraiMC_QQbot_Interface/
+
+on command "/rewaczero":
+    sender has permission "admin":
+        cancel event
+        message "【共鸣】已加载的SkMQi附属：看门狗 A"
+
+command skr_watchdog:
+    trigger:
+        sender has permission "admin":
+            set {wdg.group} to "114514"
+            set {wdg.default.bot} to "1919810"
+            wait 1 tick
+            make sender execute command "/sk reload fr_watchdog"
+
+command wd_bc_tg:
+    aliases: 切换看门狗广播
+    trigger:
+        sender has permission "admin":
+            if {showlogsingroup} is not true:
+                send "看门狗广播：是"
+                set {showlogsingroup} to true
+            else:
+                send "看门狗广播：否"
+                wait 3 ticks
+                set {showlogsingroup} to false
+
+command wd_group [<text>] [<text>]:
+    trigger:
+        sender has permission "admin":
+            if arg-1 is not set:
+                send "看门狗：本命令需要在第一个参数输入机器人账号 第二个参数输入目标群号。所有均暂且仅支持一个值。"
+            else:
+                if arg-2 is not set:
+                    send "看门狗：群号未输入。重试。"
+                else:
+                    set {wdg.group} to arg-2
+                    set {wdg.default.bot} to arg-1
+
+
+on log:
+    # if log message end with "法棍":
+    #     broadcast logger name
+    #     stop
+
+    if log level is fatal:
+        make console execute command "/mirai sendgroupmessage %{wdg.default.bot}% %{wdg.group}% %log message%"
+        stop
+
+    if {showlogsingroup} is true:
+        if logger name is "me.dreamvoid.miraimc.bukkit.BukkitPlugin":
+            stop
+        else:
+            if log message contains "服务器好像不能理解你的意思呢，":#未知指令报错的返回 可能会被恶搞 待解决
+                if log message contains "[m":
+                    make console execute command "/mirai sendgroupmessage %{wdg.default.bot}% %{wdg.group}% 什么什么 我不懂了！"
+                    stop
+            else:
+                set {_wdg.logmess} to log message
+                replace all "[m" in {_wdg.logmess} with " "
+                make console execute command "/mirai sendgroupmessage %{wdg.default.bot}% %{wdg.group}% %{_wdg.logmess}%"
+                delete {_wdg.logmess}
+                stop
