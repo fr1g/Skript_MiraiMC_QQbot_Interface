@@ -1,0 +1,183 @@
+#SkMQi Version 1.1
+#by Feiron Iguista (francoisifrig) from Corona Studio
+#GPL3
+#Dependeny: Skript-logs 0.1.3   Skript Official 2.6.1
+#
+
+options:
+    Logo: &6[SkMQi] &r >
+
+command skbor:#重载指令
+    trigger:
+        sender has permission "admin":
+            
+            wait 1 ticks
+            set {numstor::1} to "1"
+            wait 1 ticks
+            make console execute command "/sk reload skmqi"
+
+on log:#接口：判断接口和管控接口
+    set {_procc} to event-string#前处理区分机器人账号、群号以及发送人账号
+    if {_procc} start with "[MiraiMC] [GroupMessage":
+        set {obsh::*} to null
+        set {_isG.qbi} to true
+        replace first "[MiraiMC] [GroupMessage/" in {_procc} with "托"
+        set {obsh::*} to {_procc} parsed as "托%text%\] \[%text%\(%text%\)\] %text%%number%\) -\> %text%"#注意转义！ 
+        set {_obsh4t} to {obsh::4}
+
+        if {_obsh4t} is "(":
+            set {obsh::4} to "(*无群名片*) "
+        else:
+            set {obsh::4} to "%{obsh::4}%)"
+            
+        # {obsh::1}#接收机器人的Q号
+        # {obsh::2}#事件群名
+        # {obsh::3}#事件群号
+        # {obsh::4}#发送人的群名片
+        # {obsh::5}#发送人的Q号 这个是number类型。
+        # {obsh::6}#事件消息
+        # 
+        if {skmqi.debuglog} is true:
+            log "【SkMQi】机器人%{obsh::1}% 在群 %{obsh::2}% （%{obsh::3}%）  监听到来自 %{obsh::4}%【Q%{obsh::5}%】 的信息：%{obsh::6}%" to "logr/skmqi.log"
+            send "{@Logo}【SkMQi】机器人%{obsh::1}% 在群 %{obsh::2}% （%{obsh::3}%）  监听到来自 %{obsh::4}%【Q%{obsh::5}%】 的信息：%{obsh::6}%" to console
+        wait 1 ticks#请关注延迟。
+        if {obsh::*} is set:
+            set {obsh::*} to null
+
+        
+
+#管理记录的管理员。
+command skmqi [<text>] [<number>]:
+    trigger:
+        if sender has permission "admin":
+            if arg-1 is "list" or "l" or "listadmin":
+                send "{@Logo} &a列出机器人管理员列表:"
+                set {_count} to 0
+                loop {svdqapi.mgr::*}:
+                    if loop-value is set:
+                        set {_p} to loop-index
+                        send "{@Logo}  用户：%loop-value%"
+                        add 1 to {_count}
+                send "{@Logo} &a已列出管理员列表.共有 &f%{_count}% &a账户"
+                stop
+
+            else if arg-1 is "add" or "a" or "addadmin":
+                send "{@Logo}添加新的QBot管理员（使用Q号）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    set {svdqapi.mgr::%arg-2%} to arg-2
+                    send "{@Logo}完成：%arg-2%。现有%{svdqapi.mgr::*}%"
+
+            else if arg-1 is "del" or "d" or "deladmin":
+                send "{@Logo}移除旧的Qbot管理员（使用Q号）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    loop {svdqapi.mgr::*}:
+                        if loop-value is arg-2:
+                            send "{@Logo}  用户：%loop-value%"
+                            delete {svdqapi.mgr::%arg-2%}
+                            add 1 to {_count}
+                        else:
+                            send "{@Logo}none!"
+                    send "{@Logo}完成：%arg-2%。现有%{svdqapi.mgr::*}%"
+            else if arg-1 is "info" or "i":
+                send "{@Logo}正在共鸣..."
+                wait 3 ticks
+                send "{@Logo}本体：版本：B1.1 flavor:skript-official(2.6.1) with Skript-logs 0.1.3"
+                wait 7 ticks
+                make sender execute command "/rewaczero"
+
+            else if arg-1 is not set:
+                send "{@Logo}SkMiraiMC-QbotInterface: 帮助MiraiMC用户简单连结机器人框架和Skript%nl%版本：B1.1 flavor:skript-official(2.6.1) with Skript-logs 0.1.3%nl%list: 列出已有的管理员%nl%add: 用Q号添加机器人管理员%nl%del: 用Q号移除机器人管理员%nl%info: 与附属共鸣%nl%reload: 重载%nl%debug: 切换Debug模式(只会在./Skript/logs/logr/skmqi.log 和 控制台 显示Debug)%nl%addgroup: 添加群号为启用响应的群%nl%delgroup: 移除群号为禁用响应的群%nl%listgroup: 列出响应的群%nl%addban: 将指定人的回应加入不响应名单%nl%delban: 将指定人的回应移除不响应名单%nl%listban: 列出不响应的对象%nl%提示：此处我们提倡用附属来实现更多的安全组功能。%nl%不响应名单：意味着在此名单中提供了最基础的变量来判断是否不响应来自此账号的信息。%nl%造访仓库页面或<lime>https://corona.studio/ <r>获取更多信息。"
+
+
+            if arg-1 is "listban" or "lb":
+                send "{@Logo} &a列出机器人不响应名单（黑名单）列表:"
+                set {_count} to 0
+                loop {skmqi.ban::*}:
+                    if loop-value is set:
+                        set {_p} to loop-index
+                        send "{@Logo}  用户：%loop-value%"
+                        add 1 to {_count}
+                send "{@Logo} &a已列出列表.共有 &f%{_count}% &a账户"
+                stop
+
+            else if arg-1 is "addban" or "ab":
+                send "{@Logo}添加新的黑名单对象（使用Q号）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    set {skmqi.ban::%arg-2%} to arg-2
+                    send "{@Logo}完成：%arg-2%。现有%{skmqi.ban::*}%"
+
+            else if arg-1 is "delban" or "db":
+                send "{@Logo}移除旧的黑名单对象（使用Q号）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    loop {skmqi.ban::*}:
+                        if loop-value is arg-2:
+                            send "{@Logo}  用户：%loop-value%"
+                            delete {skmqi.ban::%arg-2%}
+                            add 1 to {_count}
+                        else:
+                            send "{@Logo}none!"
+                    send "{@Logo}完成：%arg-2%。现有%{skmqi.ban::*}%"
+
+            if arg-1 is "listgroup" or "lg":
+                send "{@Logo} &a列出机器人响应的群列表:"
+                set {_count} to 0
+                loop {skmqi.gp::*}:
+                    if loop-value is set:
+                        set {_p} to loop-index
+                        send "{@Logo}  群：%loop-value%"
+                        add 1 to {_count}
+                send "{@Logo} &a已列出列表.共有 &f%{_count}% &a账户"
+                stop
+
+            else if arg-1 is "addgroup" or "ag":
+                send "{@Logo}添加新的响应群（使用Q号，正常工作的前提是已经加入群）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    set {skmqi.gp::%arg-2%} to arg-2
+                    send "{@Logo}完成：%arg-2%。现有%{skmqi.gp::*}%"
+
+            else if arg-1 is "delgroup" or "dg":
+                send "{@Logo}移除相应的群（使用Q号，需要手动退出群）"
+                if arg-2 is not set:
+                    send "{@Logo}参数2不能为空，重试。"
+                else:
+                    loop {skmqi.gp::*}:
+                        if loop-value is arg-2:
+                            send "{@Logo}  群：%loop-value%"
+                            delete {skmqi.gp::%arg-2%}
+                            add 1 to {_count}
+                        else:
+                            send "{@Logo}none!"
+                    send "{@Logo}完成：%arg-2%。现有%{skmqi.gp::*}%"
+
+            else if arg-1 is "reload":
+                send "{@Logo}正在重载……"
+                wait 1 tick
+                make sender execute command "/skbor"
+            else if arg-1 is "debug":
+                if {skmqi.debuglog} is not false:
+                    set {skmqi.debuglog} to false
+                    send "{@Logo}切换Debug模式到：关"
+                else:
+                    set {skmqi.debuglog} to true
+                    send "{@Logo}切换Debug模式到：开"
+
+            else:
+                message formatted "{@Logo}尝试使用命令：<gray><cmd:/skmqi><lime>/skmqi<r> 来获取帮助。 "
+        else:
+            send "{@Logo}none!"
+
+
+        
+command 共鸣:
+    trigger:
+        make sender execute command "/skmqi info"
