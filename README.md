@@ -6,7 +6,15 @@ btw：Simplified Chinese Language Only. Unless you use Q-ten-Q-cent rather than 
 这个脚本旨在让你更轻易地作出个性化的Q群-服务器交互。如果你不会写miraimc联动插件的话。
 # 强调一下 首先你得安装的有附属：Skript-logs
 链接：https://github.com/Blueyescat/skript-logs 
-### 我只测试过1.16.5 高版本不兼容的话找这位作者催更去。
+
+开发时使用的环境：
+ - Skript Official 2.6.1
+ - Skript-logs 0.1.3
+ - Paperspigot 1.16.5 latest
+ - Azul Zulu JDK 16
+ - 请确保满足最低条件和特性需求。
+
+### 我只测试过1.16.5 高版本不兼容的话找这位logs的作者催更去。
 
 嗯……在此感谢Skript交流群的佬们给我提供的帮助（尤其是zim！）还有SuperKRIPT的XPYEX（？是他吗 总之群马甲以前叫 那什么…… 穿山甲）向我极力安利reflect……
 （“代码都给你了不会抄吗！”）
@@ -22,3 +30,20 @@ Repo里面有一个附属的示例。请尽可能按照里面的要求写你自�
 还有就是 模板的那个共鸣方法可能不太好 待高人指点awa
 # 注意啊 on log如果你直接靠后台输出来debug的话会造成无止境的循环！ 不要轻易尝试！debug输出最好用log输出到文件 然后用浏览器打开！
 （这样可以点刷新来重新查看log文件 老方便了。）
+
+# 变量名
+与解决方案示例
+`
+         {svdqapi.mgr::*} 管理员Q号的变量表
+         {obsh::1}#接收机器人的Q号
+         {obsh::2}#事件群名
+         {obsh::3}#事件群号
+         {obsh::4}#发送人的群名片
+         {obsh::5}#发送人的Q号 这个是number类型。
+         {obsh::6}#事件消息
+         判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}
+         {skmqi.ban::*}#不响应列表（黑名单），请自行loop或者list或者挨个按顺序数以确认对象的序号
+         {skmqi.gp::*}#响应群列表 序号同上。
+ 
+ `
+
