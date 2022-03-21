@@ -32,18 +32,17 @@ Repo里面有一个附属的示例。请尽可能按照里面的要求写你自�
 （这样可以点刷新来重新查看log文件 老方便了。）
 
 # 变量名
-与解决方案示例
-`
-         {svdqapi.mgr::*} 管理员Q号的变量表
-         {obsh::1}#接收机器人的Q号
-         {obsh::2}#事件群名
-         {obsh::3}#事件群号
-         {obsh::4}#发送人的群名片
-         {obsh::5}#发送人的Q号 这个是number类型。
-         {obsh::6}#事件消息
-         判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}
-         {skmqi.ban::*}#不响应列表（黑名单），请自行loop或者list或者挨个按顺序数以确认对象的序号
-         {skmqi.gp::*}#响应群列表 序号同上。
- 
- `
+与解决方案示例<br>
+
+`         {svdqapi.mgr::*} 管理员Q号的变量表`<br>
+`         {obsh::1}#接收机器人的Q号`<br>
+`         {obsh::2}#事件群名`<br>
+`         {obsh::3}#事件群号`<br>
+`         {obsh::4}#发送人的群名片`<br>
+`         {obsh::5}#发送人的Q号 这个是number类型。`<br>
+`         {obsh::6}#事件消息`<br>
+`         判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}`<br>
+`         {skmqi.ban::*}#不响应列表（黑名单），请自行loop或者list或者挨个按顺序数以确认对象的序号`<br>
+`         {skmqi.gp::*}#响应群列表 序号同上。`<br>
+
 
