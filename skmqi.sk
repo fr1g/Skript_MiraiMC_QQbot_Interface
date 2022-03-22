@@ -1,4 +1,4 @@
-#SkMQi Version 1.1
+#SkMQi Version 1.2
 #by Feiron Iguista (francoisifrig) from Corona Studio
 #GPL3
 #Dependency: Skript-logs 0.1.3   Skript Official 2.6.1
@@ -14,7 +14,7 @@ command skbor:#重载指令
             wait 1 ticks
             set {numstor::1} to "1"
             wait 1 ticks
-            make console execute command "/sk reload skmqi"
+            make console execute command "/sk reload miraiqqbotskinterface"
 
 on log:#接口：判断接口和管控接口
     set {_procc} to event-string#前处理区分机器人账号、群号以及发送人账号
@@ -61,6 +61,20 @@ command skmqi [<text>] [<number>]:
                 send "{@Logo} &a已列出管理员列表.共有 &f%{_count}% &a账户"
                 stop
 
+            else if arg-1 is "rex" or "reloadextras" or "reloadextra" or "reloadex" or "reloadrelates" or "reloadrelate" or "rr":
+                if arg-2 is 0:
+                    send "{@Logo} 即将重载附属然后重载本体。"
+                    make console execute command "/reloadallskmqiex"
+                    wait 10 ticks
+                    send "{@Logo} 附属加载完成，重新加载本体……"
+                    make console execute command "/skmqi reload"
+                    send "{@Logo} 全部重载完成"
+                else:
+                    send "{@Logo} 即将重载附属。"
+                    wait 1 ticks
+                    make console execute command "/reloadallskmqiex"
+                    send "{@Logo} 附属重载完成。"
+
             else if arg-1 is "add" or "a" or "addadmin":
                 send "{@Logo}添加新的QBot管理员（使用Q号）"
                 if arg-2 is not set:
@@ -90,7 +104,7 @@ command skmqi [<text>] [<number>]:
                 make sender execute command "/rewaczero"
 
             else if arg-1 is not set:
-                send "{@Logo}SkMiraiMC-QbotInterface: 帮助MiraiMC用户简单连结机器人框架和Skript%nl%版本：B1.1 flavor:skript-official(2.6.1) with Skript-logs 0.1.3%nl%list: 列出已有的管理员%nl%add: 用Q号添加机器人管理员%nl%del: 用Q号移除机器人管理员%nl%info: 与附属共鸣%nl%reload: 重载%nl%debug: 切换Debug模式(只会在./Skript/logs/logr/skmqi.log 和 控制台 显示Debug)%nl%addgroup: 添加群号为启用响应的群%nl%delgroup: 移除群号为禁用响应的群%nl%listgroup: 列出响应的群%nl%addban: 将指定人的回应加入不响应名单%nl%delban: 将指定人的回应移除不响应名单%nl%listban: 列出不响应的对象%nl%提示：此处我们提倡用附属来实现更多的安全组功能。%nl%不响应名单：意味着在此名单中提供了最基础的变量来判断是否不响应来自此账号的信息。%nl%造访仓库页面或<lime>https://corona.studio/ <r>获取更多信息。"
+                send "{@Logo}SkMiraiMC-QbotInterface: 帮助MiraiMC用户简单连结机器人框架和Skript%nl%版本：B1.1 flavor:skript-official(2.6.1) with Skript-logs 0.1.3%nl%list: 列出已有的管理员%nl%add: 用Q号添加机器人管理员%nl%del: 用Q号移除机器人管理员%nl%info: 与附属共鸣%nl%reload: 重载%nl%debug: 切换Debug模式(只会在./Skript/logs/logr/skmqi.log 和 控制台 显示Debug)%nl%addgroup: 添加群号为启用响应的群%nl%delgroup: 移除群号为禁用响应的群%nl%listgroup: 列出响应的群%nl%addban: 将指定人的回应加入不响应名单%nl%delban: 将指定人的回应移除不响应名单%nl%listban: 列出不响应的对象%nl%rex: 重载所有附属。（/skmqi rex 0 可以重载所有附属然后重载本体。需要附属符合标准B1.2）%nl%提示：此处我们提倡用附属来实现更多的安全组功能。%nl%不响应名单：意味着在此名单中提供了最基础的变量来判断是否不响应来自此账号的信息。%nl%造访仓库页面或<lime>https://corona.studio/ <r>获取更多信息。"
 
 
             if arg-1 is "listban" or "lb":
