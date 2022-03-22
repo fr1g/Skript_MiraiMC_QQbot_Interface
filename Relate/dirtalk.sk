@@ -15,6 +15,11 @@ command skr_dt:
             wait 1 tick
             make sender execute command "/sk reload dirtalk"
 
+on command "/reloadallskmqiex":
+    cancel event
+    sender has permission "admin":
+        message "【共鸣】已重新加载的SkMQi附属：消息直通 A"
+        make console execute command "/skr_dt"
 
 command dtoggle:
     aliases: 切换直通开关
