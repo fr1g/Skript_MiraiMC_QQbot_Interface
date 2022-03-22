@@ -6,13 +6,19 @@ on command "/rewaczero":
     sender has permission "admin":
         cancel event
         message "【共鸣】已加载的SkMQi附属：Reply 版本0.1"
-
 command skr_reply:
     trigger:
         sender has permission "admin":
             wait 1 tick
             make sender execute command "/sk reload skmqb_reply"
 
+on command "/reloadallskmqiex":
+    cancel event
+    sender has permission "admin":
+        message "【共鸣】已重新加载的SkMQi附属：Reply 版本0.1"
+        make console execute command "/skr_reply"
+
+        
 # 这是一个SkMQi附属的模板，同时是一个允许自定义指令执行的附属。
 # 你可以把以下的代码删除并在上方相应的地方填入你的附属的信息，以保证其他SkMQi用户的共鸣体验。请注意！在修改模板时请注意一致性！
 # 谨记变量表：
@@ -23,6 +29,7 @@ command skr_reply:
         # {obsh::4}#发送人的群名片
         # {obsh::5}#发送人的Q号 这个是number类型。
         # {obsh::6}#事件消息
+        # 更多变量见readme
 # 判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}
 # 请注意，除非使用多方面的限定，否则所有管理员都会是全局的。
 # 另外，由于各种不确定，请注意不同命令之间的配合，以及学会“卡时间”。
@@ -35,6 +42,11 @@ on log:
                 if {_skqb.reply::1} is "说点什么":
                     make console execute command "/呐"
                     make console execute command "/mirai sendgroupmessage %{obsh::1}% %{obsh::3}% 这是Komandy———借助强大的MiraiMC、Skript和基于Skript的接口SkMQi 通过SkMQi-Reply实现的一次简单的回复。随着不同变量的叠加和功能的实现，Komandy将利用这一系列插件的配合，在MMC尚未支持Mirai插件之前，突破限制并实现许多功能。"
-                    set {obsh::*} to null#最好每次收尾
+                    set {obsh::*} to null
                     stop
+                else:
+                    if {obsh::3} is "419902868":
+                        make console execute command "/%{_skqb.reply::1}%"
+                        set {obsh::*} to null
+                        stop
 
