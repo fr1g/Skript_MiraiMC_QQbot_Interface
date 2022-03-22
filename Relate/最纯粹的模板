@@ -8,6 +8,12 @@ command <自定义你的重载指令>:
         sender has permission "admin":
             wait 1 tick
             make sender execute command "/sk reload <你的脚本的文件名>"
+            
+on command "/reloadallskmqiex":#用于响应整体reload 标准1.2
+    cancel event
+    sender has permission "admin":
+        message "【共鸣】已重新加载的SkMQi附属：<你的附属名和版本号>"
+        make console execute command "/<自定义你的重载指令>"
 
 # 这是一个SkMQi附属的模板，同时是一个允许自定义指令执行的附属。
 # 你可以在上方相应的地方填入你的附属的信息，以保证其他SkMQi用户的共鸣体验。请注意！在修改模板时请注意一致性！
