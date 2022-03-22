@@ -14,6 +14,12 @@ command skr_watchdog:
             set {wdg.default.bot} to "1919810"
             wait 1 tick
             make sender execute command "/sk reload fr_watchdog"
+            
+on command "/reloadallskmqiex":
+    cancel event
+    sender has permission "admin":
+        message "【共鸣】已重新加载的SkMQi附属：看门狗 A"
+        make console execute command "/skr_watchdog"
 
 command wd_bc_tg:
     aliases: 切换看门狗广播
