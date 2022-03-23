@@ -14,7 +14,7 @@ command skbor:#重载指令
             wait 1 ticks
             set {numstor::1} to "1"
             wait 1 ticks
-            make console execute command "/sk reload miraiqqbotskinterface"
+            make console execute command "/sk reload skmqi"
 
 on log:#接口：判断接口和管控接口
     set {_procc} to event-string#前处理区分机器人账号、群号以及发送人账号
