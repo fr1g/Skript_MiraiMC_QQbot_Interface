@@ -1,6 +1,6 @@
 # Skript_MiraiMC_QQbot_Interface
 Skript_MiraiMC_QQbot_Interface (SkMQi) is a Skript Interface to make MC Bukkit Server Owners to make their MiraiMC QQ bot Application Easy to be Customized.
-btw：Simplified Chinese Language Only. Unless you use discord rather than Q-ten-Q-cent.
+btw：Simplified Chinese Language Only. Unless you are not a CHS speaker and use Q-ten-Q-cent rather than discord.
 
 # 得了得了 咱不是洋鬼子嗷
 这个脚本旨在让你更轻易地作出个性化的Q群-服务器交互。如果你不会写miraimc联动插件的话。
