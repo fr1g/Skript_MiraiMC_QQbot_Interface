@@ -49,4 +49,8 @@ Repo里面有一个附属的示例。请尽可能按照里面的要求写你自�
 新标准：要完全适用于1.2版本，需要加上共鸣重载的反应。
 详见示例。
 
+## 应用
+见介绍文章：“Komandy ww SkMQi”
+https://feiron.xyz/index.php/archives/179/
+（大陆访问速度较慢）
 
