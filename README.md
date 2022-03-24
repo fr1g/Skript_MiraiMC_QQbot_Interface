@@ -52,5 +52,5 @@ Repo里面有一个附属的示例。请尽可能按照里面的要求写你自�
 ## 应用
 见介绍文章：“Komandy ww SkMQi”
 https://feiron.xyz/index.php/archives/179/
-（大陆访问速度较慢）
+（大陆访问速度较慢，而我只是租不起大陆服务器而已。）
 
