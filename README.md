@@ -38,7 +38,7 @@ Repo里面有一个附属的示例。请尽可能按照里面的要求写你自�
 `         {obsh::1}#接收机器人的Q号`<br>
 `         {obsh::2}#事件群名`<br>
 `         {obsh::3}#事件群号`<br>
-`         {obsh::4}#发送人的群名片。这个有半个括号去不掉 所以假如目标的名片是aaa，stirng会是"aaa("`<br>
+`         {obsh::4}#发送人的群名片。这个有半个括号去不掉 所以假如目标的名片是aaa，string会是"aaa("`<br>
 `         {obsh::5}#发送人的Q号 这个是number类型。`<br>
 `         {obsh::6}#事件消息`<br>
 `         判断一个人是不是管理员：if {svdqapi.mgr::*} contains {obsh::5}`<br>
